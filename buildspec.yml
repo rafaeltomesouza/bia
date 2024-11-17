@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Fazendo login no ECR...      
+      - echo Iniciando ECR...      
       - aws --version
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 761018867532.dkr.ecr.us-east-1.amazonaws.com
       - REPOSITORY_URI=761018867532.dkr.ecr.us-east-1.amazonaws.com/bia
@@ -11,7 +11,7 @@ phases:
       - IMAGE_TAG= ${COMMIT_HASH:=latest}
   build:
     commands:
-      - echo Build iniciado em `date`
+      - echo Building in `date`
       - echo Gerando imagem da BIA...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
